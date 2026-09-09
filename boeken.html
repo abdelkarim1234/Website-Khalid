@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="nl" data-lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boek Khalid — Khalid Boudrari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/style.css">
+</head>
+<body class="page-booking">
+
+<header class="topbar">
+  <a class="topbar__name" href="index.html">Khalid Boudrari</a>
+
+  <nav class="topbar__nav" aria-label="Hoofdnavigatie">
+    <a href="bio.html"><span lang="nl">Wie is Khalid</span><span lang="en">About</span></a>
+    <a href="gedichten.html"><span lang="nl">Gedichten</span><span lang="en">Poems</span></a>
+    <a href="optredens.html"><span lang="nl">Optredens</span><span lang="en">Shows</span></a>
+    <a class="topbar__cta" href="boeken.html"><span lang="nl">Boek Khalid</span><span lang="en">Book Khalid</span></a>
+  </nav>
+
+  <div class="langswitch" role="group" aria-label="Taal / Language">
+    <button type="button" data-setlang="nl" aria-pressed="true">NL</button>
+    <span aria-hidden="true">/</span>
+    <button type="button" data-setlang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<main>
+
+  <section class="pagehead">
+    <h1><span lang="nl">Boek Khalid</span><span lang="en">Book Khalid</span></h1>
+    <p><span lang="nl">Voor festivals, scholen, bedrijven en huiskamers.</span><span lang="en">For festivals, schools, companies and living rooms.</span></p>
+  </section>
+
+  <section class="prose">
+    <div lang="nl">
+      <h2>Wat hij brengt</h2>
+      <p>Een set van vijf tot vijftien minuten, een volledige voorstelling, of een workshop schrijven en performen. Laat weten wat je in gedachten hebt en hij denkt mee.</p>
+      <p><em>Vul hier de tarieven, de technische vereisten en het reisgebied aan.</em></p>
+    </div>
+    <div lang="en">
+      <h2>What he brings</h2>
+      <p>A set of five to fifteen minutes, a full show, or a workshop on writing and performing. Tell him what you have in mind and he will think along.</p>
+      <p><em>Add rates, technical requirements and travel area here.</em></p>
+    </div>
+  </section>
+
+  <form class="form" data-form>
+    <label>
+      <span lang="nl">Naam en organisatie</span><span lang="en">Name and organisation</span>
+      <input type="text" name="naam" required>
+    </label>
+    <label>
+      <span lang="nl">E-mailadres</span><span lang="en">Email address</span>
+      <input type="email" name="email" required>
+    </label>
+    <label>
+      <span lang="nl">Datum</span><span lang="en">Date</span>
+      <input type="date" name="datum">
+    </label>
+    <label>
+      <span lang="nl">Soort optreden</span><span lang="en">Type of performance</span>
+      <select name="soort">
+        <option value="set">Set (5–15 min)</option>
+        <option value="voorstelling">Voorstelling / full show</option>
+        <option value="workshop">Workshop</option>
+        <option value="anders">Anders / other</option>
+      </select>
+    </label>
+    <label>
+      <span lang="nl">Vertel over het evenement</span><span lang="en">Tell him about the event</span>
+      <textarea name="bericht"></textarea>
+    </label>
+    <button class="btn" type="submit">
+      <span lang="nl">Aanvraag versturen</span><span lang="en">Send request</span>
+    </button>
+    <p class="form__status" role="status"></p>
+  </form>
+
+
+</main>
+
+<footer class="footer">
+  <div class="footer__col">
+    <h2 class="footer__logo">Khalid<br>Boudrari</h2>
+  </div>
+
+  <div class="footer__col">
+    <h3><span lang="nl">Contact</span><span lang="en">Contact</span></h3>
+    <p><a href="mailto:hallo@khalidboudrari.be">hallo@khalidboudrari.be</a></p>
+    <p><a href="boeken.html"><span lang="nl">Boekingsaanvraag</span><span lang="en">Booking request</span></a></p>
+  </div>
+
+  <div class="footer__col">
+    <h3><span lang="nl">Volgen</span><span lang="en">Follow</span></h3>
+    <p><a href="https://www.instagram.com/khalid.boudrari">Instagram</a></p>
+
+  </div>
+
+  <p class="footer__meta">&copy; <span id="year">2026</span> Khalid Boudrari</p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
