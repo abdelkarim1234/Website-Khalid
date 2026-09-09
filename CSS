@@ -1,2 +1,369 @@
-css/.gitkeep
+css/style.css
+/* =========================================================
+   Khalid Boudrari — stylesheet
+   Kleuren, typografie en layout staan hier centraal.
+   Pas de waarden in :root aan om de hele site mee te wijzigen.
+   ========================================================= */
+
+:root{
+  /* Kleuren — geïnspireerd op risoprint (zine-druk) */
+  --paper:      #E5E2D9;   /* papier, achtergrond */
+  --paper-warm: #DAD6CA;   /* iets donkerder papier */
+  --ink:        #000000;   /* tekst */
+  --blue:       #16268C;   /* eerste inkt: diepblauw */
+  --pink:       #FF3F8E;   /* tweede inkt: fluorpink */
+
+  /* Typografie */
+  --display: "Bricolage Grotesque", "Arial Narrow", sans-serif;
+  --body:    "Newsreader", Georgia, serif;
+
+  /* Ritme */
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+  --rule: 1px solid var(--ink);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  background-color: var(--paper);
+  /* zachte papierkorrel */
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: clamp(1rem, .95rem + .25vw, 1.15rem);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+img{ max-width:100%; display:block; }
+
+a{ color:inherit; }
+
+h1,h2,h3{ font-family:var(--display); font-weight:800; line-height:.95; letter-spacing:-.03em; margin:0; }
+
+::selection{ background:var(--pink); color:var(--paper); }
+
+:focus-visible{ outline:3px solid var(--pink); outline-offset:3px; }
+
+/* ---------- Taalwissel: toont enkel de actieve taal ---------- */
+html[data-lang="nl"] [lang="en"]{ display:none; }
+html[data-lang="en"] [lang="nl"]{ display:none; }
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; gap:1.5rem;
+  padding:.85rem var(--gutter);
+  background:var(--paper);
+  border-bottom:var(--rule);
+}
+
+.topbar__name{
+  font-family:var(--display); font-weight:800; font-size:1.05rem;
+  letter-spacing:-.02em; text-decoration:none; white-space:nowrap;
+}
+
+.topbar__nav{
+  display:flex; gap:1.25rem; margin-left:auto;
+  font-family:var(--display); font-size:.95rem; font-weight:600;
+}
+
+.topbar__nav a{
+  text-decoration:none;
+  padding-bottom:2px;
+  border-bottom:2px solid transparent;
+}
+.topbar__nav a:hover{ border-bottom-color:var(--pink); }
+
+.topbar__cta{
+  background:var(--blue); color:var(--paper);
+  padding:.35rem .8rem .45rem; border-radius:999px;
+}
+.topbar__cta:hover{ background:var(--pink); border-bottom-color:transparent !important; }
+
+.langswitch{
+  display:flex; align-items:center; gap:.35rem;
+  font-family:var(--display); font-size:.85rem; font-weight:600;
+}
+.langswitch button{
+  border:0; background:none; padding:.15rem .1rem; cursor:pointer;
+  font:inherit; color:var(--ink); opacity:.45;
+}
+.langswitch button[aria-pressed="true"]{ opacity:1; text-decoration:underline; text-decoration-color:var(--pink); text-underline-offset:4px; text-decoration-thickness:2px; }
+
+/* =========================================================
+   RISO-EFFECT VOOR FOTO'S
+   Zwart-witfoto gedrukt in twee inkten, met lichte misregistratie.
+   ========================================================= */
+.riso{ position:relative; margin:0; background:var(--blue); isolation:isolate; overflow:hidden; }
+.riso img{
+  width:100%; height:100%; object-fit:cover;
+  filter:grayscale(1) contrast(1.3) brightness(.92);
+  mix-blend-mode:screen;
+}
+.riso::after{
+  content:""; position:absolute; inset:0;
+  background:var(--pink); mix-blend-mode:multiply; opacity:.17;
+  pointer-events:none;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  align-items:end;
+  gap:clamp(1rem,3vw,3rem);
+  padding:clamp(2rem,6vw,5rem) var(--gutter) clamp(2rem,5vw,4rem);
+  border-bottom:var(--rule);
+}
+
+.hero__role{
+  font-family:var(--display); font-weight:600;
+  font-size:clamp(.9rem,1.4vw,1.1rem);
+  margin:0 0 .9rem; letter-spacing:.01em;
+}
+
+.hero__name{
+  font-size:clamp(3.2rem,13vw,11rem);
+  line-height:.82;
+  letter-spacing:-.05em;
+}
+.hero__name span{ display:block; }
+
+.hero__line{
+  font-family:var(--body); font-size:clamp(1.15rem,2.2vw,1.75rem);
+  font-style:italic; font-weight:300; line-height:1.3;
+  margin:clamp(1.25rem,3vw,2.25rem) 0 0;
+  max-width:26ch;
+}
+
+.hero__figure{ aspect-ratio:1/1; }
+.hero__figure img{ object-position:50% 22%; }
+
+/* één rustige opkomst bij het laden */
+.rise{ animation:rise .8s cubic-bezier(.2,.7,.3,1) backwards; }
+.hero__name span:nth-child(1){ animation-delay:.05s; }
+.hero__name span:nth-child(2){ animation-delay:.15s; }
+.hero__line{ animation-delay:.3s; }
+@keyframes rise{ from{ opacity:0; transform:translateY(.5em); } }
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+.intro{
+  display:grid; grid-template-columns:1.4fr .6fr;
+  gap:clamp(2rem,5vw,4rem);
+  padding:clamp(2.5rem,6vw,5rem) var(--gutter);
+  border-bottom:var(--rule);
+}
+
+.intro__text p{ max-width:56ch; font-size:clamp(1.15rem,1.9vw,1.5rem); line-height:1.5; margin:0; }
+
+.intro__more{ margin-top:1.5rem !important; font-family:var(--display); font-size:1rem; font-weight:600; }
+.intro__more a{ text-decoration:none; border-bottom:2px solid var(--pink); padding-bottom:2px; }
+.intro__more a:hover{ background:var(--pink); color:var(--paper); }
+
+.palmares{ list-style:none; margin:0; padding:0; align-self:start; }
+.palmares li{
+  border-top:var(--rule); padding:.9rem 0;
+  font-family:var(--display); font-size:.98rem; font-weight:600; line-height:1.35;
+}
+.palmares b{ display:block; color:var(--blue); font-size:1.6rem; letter-spacing:-.03em; }
+
+/* =========================================================
+   SETLIST — de links naar de andere pagina's
+   ========================================================= */
+.setlist{ border-bottom:var(--rule); }
+
+.setlist__title{
+  font-size:1rem; font-weight:600; letter-spacing:0;
+  padding:1.5rem var(--gutter) .75rem;
+}
+
+.track{
+  display:grid; grid-template-columns:1fr auto; align-items:baseline;
+  gap:1.5rem;
+  padding:clamp(1rem,2.2vw,1.6rem) var(--gutter);
+  border-top:var(--rule);
+  text-decoration:none;
+  transition:background-color .18s ease, color .18s ease;
+}
+
+.track__label{
+  font-family:var(--display); font-weight:800;
+  font-size:clamp(1.9rem,6vw,4.5rem);
+  line-height:.9; letter-spacing:-.04em;
+}
+
+.track__note{
+  font-size:.95rem; font-style:italic; font-weight:300;
+  max-width:34ch; text-align:right; opacity:.75;
+}
+
+.track:hover,.track:focus-visible{ background:var(--blue); color:var(--paper); }
+.track:hover .track__note,.track:focus-visible .track__note{ opacity:1; }
+.track--accent:hover,.track--accent:focus-visible{ background:var(--pink); }
+
+/* =========================================================
+   PODIUM
+   ========================================================= */
+.stage{
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:clamp(1.5rem,4vw,3.5rem);
+  align-items:center;
+  padding:clamp(2.5rem,6vw,5rem) var(--gutter);
+}
+.stage__figure{ aspect-ratio:3/4; }
+.stage__quote{ margin:0; }
+.stage__quote p{
+  font-size:clamp(1.7rem,4.6vw,3.6rem); line-height:1.12;
+  font-weight:300; margin:0; max-width:16ch;
+}
+
+/* =========================================================
+   BINNENPAGINA'S — gedeelde onderdelen
+   ========================================================= */
+.pagehead{
+  padding:clamp(2.5rem,7vw,5.5rem) var(--gutter) clamp(1.5rem,4vw,3rem);
+  border-bottom:var(--rule);
+}
+.pagehead h1{ font-size:clamp(2.6rem,9vw,7rem); letter-spacing:-.045em; }
+.pagehead p{
+  font-size:clamp(1.1rem,2vw,1.4rem); font-style:italic; font-weight:300;
+  max-width:44ch; margin:1.25rem 0 0;
+}
+
+.prose{
+  padding:clamp(2rem,5vw,4rem) var(--gutter);
+  max-width:68ch;
+}
+.prose h2{ font-size:clamp(1.5rem,3vw,2.2rem); margin:2.5rem 0 .75rem; }
+.prose h2:first-child{ margin-top:0; }
+.prose p{ margin:0 0 1.1rem; }
+.prose a{ text-decoration-color:var(--pink); text-underline-offset:3px; }
+
+/* eenvoudige knop */
+.btn{
+  display:inline-block; font-family:var(--display); font-weight:600;
+  background:var(--blue); color:var(--paper); text-decoration:none;
+  padding:.7rem 1.4rem .8rem; border-radius:999px; border:0; cursor:pointer;
+  font-size:1rem;
+}
+.btn:hover{ background:var(--pink); }
+
+/* formulier */
+.form{ display:grid; gap:1.1rem; max-width:38rem; padding:0 var(--gutter) clamp(3rem,6vw,5rem); }
+.form label{ font-family:var(--display); font-weight:600; font-size:.95rem; display:grid; gap:.35rem; }
+.form input,.form select,.form textarea{
+  font:inherit; font-size:1rem; padding:.7rem .8rem;
+  background:var(--paper); border:var(--rule); border-radius:0; color:var(--ink);
+}
+.form textarea{ min-height:9rem; resize:vertical; }
+.form .btn{ justify-self:start; }
+.form__status{ font-family:var(--display); font-weight:600; color:var(--blue); }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer{
+  display:grid; grid-template-columns:1.4fr .6fr .6fr;
+  gap:2rem;
+  padding:clamp(2.5rem,6vw,4rem) var(--gutter) 2rem;
+  background:var(--ink); color:var(--paper);
+  border-top:var(--rule);
+}
+.footer a{ color:var(--paper); text-decoration-color:var(--pink); text-underline-offset:3px; }
+.footer a:hover{ color:var(--pink); }
+.footer__logo{ font-size:clamp(2rem,6vw,3.5rem); line-height:.9; margin:0; }
+.footer__col h3{ font-size:1rem; font-weight:600; margin:0 0 .6rem; }
+.footer__col p{ margin:0 0 .35rem; font-size:.95rem; }
+.footer__meta{ grid-column:1/-1; margin:2rem 0 0; font-size:.85rem; opacity:.6; }
+
+/* =========================================================
+   MOBIEL
+   ========================================================= */
+@media (max-width:900px){
+  .hero,.intro,.stage,.footer{ grid-template-columns:1fr; }
+  .hero__figure{ aspect-ratio:4/3; }
+  .stage__figure{ aspect-ratio:4/3; }
+  .track{ grid-template-columns:1fr; gap:.5rem; }
+  .track__note{ text-align:left; max-width:none; }
+  .topbar__nav{ display:none; }
+  .langswitch{ margin-left:auto; }
+  .footer__logo{ margin-bottom:1rem; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{ animation:none !important; transition:none !important; }
+  html{ scroll-behavior:auto; }
+}
+
+/* =========================================================
+   VIDEO
+   ========================================================= */
+.videowrap{ padding:clamp(2rem,5vw,4rem) var(--gutter); }
+.video{
+  position:relative; aspect-ratio:16/9;
+  background:var(--ink); border:var(--rule);
+  max-width:64rem;
+}
+.video iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.video__caption{
+  max-width:64rem; margin:1rem 0 0;
+  font-size:.98rem; font-style:italic; font-weight:300;
+}
+.video__caption a{
+  font-family:var(--display); font-style:normal; font-weight:600;
+  font-size:.9rem; margin-left:.5rem; text-decoration:none;
+  border-bottom:2px solid var(--pink); padding-bottom:1px;
+}
+.video__caption a:hover{ background:var(--pink); color:var(--paper); }
+
+/* =========================================================
+   FORMATEN / PRIJZEN
+   ========================================================= */
+.form--wide{ max-width:46rem; }
+
+.tiers{ border:0; padding:0; margin:0 0 1rem; }
+.tiers legend{
+  font-family:var(--display); font-weight:800;
+  font-size:clamp(1.4rem,3vw,2rem); letter-spacing:-.03em;
+  padding:0; margin-bottom:.75rem;
+}
+
+.tier{
+  display:grid; grid-template-columns:auto 4.5rem 1fr;
+  align-items:baseline; gap:.9rem;
+  border-top:var(--rule); padding:1rem 0;
+  cursor:pointer; font-family:var(--body);
+}
+.tier:last-of-type{ border-bottom:var(--rule); }
+
+.tier input{ accent-color:var(--blue); width:1.05rem; height:1.05rem; margin:0; }
+
+.tier__price{
+  font-family:var(--display); font-weight:800;
+  font-size:clamp(1.5rem,3vw,2.1rem); letter-spacing:-.04em;
+  color:var(--blue);
+}
+
+.tier__body{ display:block; font-size:.98rem; line-height:1.45; }
+.tier__body b{ font-family:var(--display); font-size:1.05rem; display:block; }
+
+.tier:has(input:checked){ background:var(--paper-warm); }
+.tier:has(input:checked) .tier__price{ color:var(--pink); }
+
+@media (max-width:640px){
+  .tier{ grid-template-columns:auto 1fr; }
+  .tier__price{ grid-column:2; }
+  .tier__body{ grid-column:2; }
+}
+
 
